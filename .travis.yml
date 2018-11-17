@@ -1,0 +1,20 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t hellomoto177/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run hellomoto177/react-test npm run test -- --coverage
+
+after_success:
+  -  docker build -t hellomoto177/fib-client ./client
+  -  docker build -t hellomoto177/fib-nginx ./nginx
+  -  docker build -t hellomoto177/fib-server ./server
+  -  docker build -t hellomoto177/fib-worker ./worker
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push hellomoto177/fib-client
+  - docker push hellomoto177/fib-nginx
+  - docker push hellomoto177/fib-server
+  - docker push hellomoto177/fib-worker
