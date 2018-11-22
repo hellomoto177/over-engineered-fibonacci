@@ -18,3 +18,16 @@ after_success:
   - docker push hellomoto177/fib-nginx
   - docker push hellomoto177/fib-server
   - docker push hellomoto177/fib-worker
+
+deploy:
+  provider: elasticbeanstalk
+  region: us-east-2
+  app: fib-docker
+  env: FibDocker-env
+  bucket_name: elasticbeanstalk-us-east-2-175344789538
+  bucket_path: docker-fib
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: $AWS_SECRET_KEY
