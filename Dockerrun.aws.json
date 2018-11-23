@@ -5,29 +5,25 @@
       "name": "client", 
       "image": "hellomoto177/fib-client",
       "hostname": "client",
-      "essential": false,
-      "memory": 128
+      "essential": false
     },
     {
       "name": "server",
       "image": "hellomoto177/fib-server",
       "hostname": "api",
-      "essential": false,
-      "memory": 128
+      "essential": false
     },
     {
       "name": "worker",
       "image": "hellomoto177/fib-worker",
       "hostname": "worker",
-      "essential": false,
-      "memory": 128
+      "essential": false
     },
     {
       "name": "nginx",
       "image": "hellomoto177/fib-nginx",
       "hostname": "nginx",
       "essential": true,
-      "memory": 128,
       "portMappings": [
         {
           "hostPort": 80,
